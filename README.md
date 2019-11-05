@@ -3,8 +3,8 @@
 ### Platform specificions
 
 Platform Choice: [AWS EKS](https://aws.amazon.com/eks/) (Preliminary) <br />
-Docker Orchestration: [Kubernetes](https://kubernetes.io/) (Integrated with AWS EKS) <br />
-Serverless Framework: Not yet selected ([OpenFaas](https://www.openfaas.com/), [Kubeless](https://kubeless.io/)) <br />
+Docker Orchestration: [Kubernetes](https://kubernetes.io/) (Integrated with AWS EKS, no need to install and configure manually) <br />
+Serverless Framework: Not yet selected ([OpenFaas](https://www.openfaas.com/) (Recommended as it has better documentation and more stackoverflow stars), [Kubeless](https://kubeless.io/)) <br />
 Programming Language Choice: Not yet selected (Jimmy Lin's paper used Python as Python packages have smaller sizes than Java packages) <br />
 
 
@@ -17,6 +17,8 @@ pip install awscli --upgrade --user
 
 Step 2: Configure the AWS CLI credentials using [AWS Credentials](https://docs.google.com/document/d/1YR27oAiMSkNcl4CCAiaQ6h-hg12sXD5WRzE_1wMKVVQ/edit?usp=sharing)
 
+Type ```aws configure``` and enter your credentials
+
 ```
 AWS Access Key ID [None]:
 AWS Secret Access Key [None]:
@@ -24,9 +26,9 @@ Default region name [None]: us-east-1
 Default output format [None]: json
 ```
 
-Step 3: Install eksctl
-(Note: Please use the following command for installing eksctl, as they also automatically install ```kubectl``` and 
-```aws-iam-authenticator``` for you.)
+Step 3: Install eksctl <br />
+(Note: Please use the following commands for installing eksctl, as they also automatically install ```kubectl``` and 
+```aws-iam-authenticator``` for you, otherwise you may encounter verfication issues)
 
 
 Step 3.1: If you don't have homebrew, install it with the following command
@@ -54,7 +56,7 @@ eksctl version
 ```
 
 
-### Setting up Kubernetes cluster
+### Setting up Kubernetes cluster (Only need to be done once)
 Example from [examples](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
 ```
 eksctl create cluster \
@@ -71,10 +73,29 @@ eksctl create cluster \
 Use ```eksctl create cluster --help``` for more details.
 
 
-### Deploying Kubeless on Kubernetes
+After the cluster is created, use
+```
+kubectl get svc
+```
+to check available Kubernetes clusters.
 
-### Deploying functions on Kubeless
 
+If you encounter error ```"aws-iam-authenticator": executable file not found in $PATH```, then your AWS account credentials were not configured correctly.
+
+
+
+### Shutting down EKS cluster
+Looks like we can not shut down a cluster, we have to delete it .....
+
+
+### Deploying OpenFaas on Kubernetes
+
+### Deploying functions on OpenFaas
+
+### Useful tools
+#### Deploy the Kubernetes Web UI (Dashboard)
+
+[Link](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html)
 
 ### Report Documentation Link
 [Overleaf](https://www.overleaf.com/project/5dbb44b7d697d800012661ca)
