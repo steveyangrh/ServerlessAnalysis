@@ -1,5 +1,13 @@
 ## Getting started
 
+### Platform specificions
+
+Platform Choice: [AWS EKS](https://aws.amazon.com/eks/) (Preliminary)
+Docker Orchestration: [Kubernetes](https://kubernetes.io/) (Integrated with AWS EKS)
+Serverless Framework: Not yet selected ([OpenFaas](https://www.openfaas.com/), [Kubeless](https://kubeless.io/))
+Programming Language Choice: Not yet selected (Jimmy Lin's paper used Python as Python packages have smaller sizes than Java packages)
+
+
 ### Preperation
 
 Step 1: Install the latest version of AWS CLI
@@ -47,8 +55,20 @@ eksctl version
 
 
 ### Setting up Kubernetes cluster
-    ~ Using AWS EKS for managing Kubernetes cluster
-    
+Example from [examples](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
+```
+eksctl create cluster \
+--name test \
+--version 1.14 \
+--region us-east-1 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--nodes 3 \
+--nodes-min 1 \
+--nodes-max 4 \
+--node-ami auto
+```
+Use ```eksctl create cluster --help``` for more details.
 
 
 ### Deploying Kubeless on Kubernetes
