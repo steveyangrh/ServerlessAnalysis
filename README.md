@@ -2,10 +2,10 @@
 
 ### Platform specificions
 
-Platform Choice: [AWS EKS](https://aws.amazon.com/eks/) (Preliminary)
-Docker Orchestration: [Kubernetes](https://kubernetes.io/) (Integrated with AWS EKS)
-Serverless Framework: Not yet selected ([OpenFaas](https://www.openfaas.com/), [Kubeless](https://kubeless.io/))
-Programming Language Choice: Not yet selected (Jimmy Lin's paper used Python as Python packages have smaller sizes than Java packages)
+Platform Choice: [AWS EKS](https://aws.amazon.com/eks/) (Preliminary) <br />
+Docker Orchestration: [Kubernetes](https://kubernetes.io/) (Integrated with AWS EKS) <br />
+Serverless Framework: Not yet selected ([OpenFaas](https://www.openfaas.com/), [Kubeless](https://kubeless.io/)) <br />
+Programming Language Choice: Not yet selected (Jimmy Lin's paper used Python as Python packages have smaller sizes than Java packages) <br />
 
 
 ### Preperation
