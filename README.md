@@ -10,12 +10,12 @@ Programming Language Choice: Not yet selected (Jimmy Lin's paper used Python as 
 
 ### Preperation
 
-Step 1: Install the latest version of AWS CLI
+##### Step 1: Install the latest version of AWS CLI
 ```
 pip install awscli --upgrade --user
 ```
 
-Step 2: Configure the AWS CLI credentials using [AWS Credentials](https://docs.google.com/document/d/1YR27oAiMSkNcl4CCAiaQ6h-hg12sXD5WRzE_1wMKVVQ/edit?usp=sharing)
+##### Step 2: Configure the AWS CLI credentials using [AWS Credentials](https://docs.google.com/document/d/1YR27oAiMSkNcl4CCAiaQ6h-hg12sXD5WRzE_1wMKVVQ/edit?usp=sharing)
 
 Type ```aws configure``` and enter your credentials
 
@@ -26,22 +26,22 @@ Default region name [None]: us-east-1
 Default output format [None]: json
 ```
 
-Step 3: Install eksctl <br />
+##### Step 3: Install eksctl <br />
 (Note: Please use the following commands for installing eksctl, as they also automatically install ```kubectl``` and 
 ```aws-iam-authenticator``` for you, otherwise you may encounter verfication issues)
 
 
-Step 3.1: If you don't have homebrew, install it with the following command
+###### Step 3.1: If you don't have homebrew, install it with the following command
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Step 3.2: Install the Weaveworks Homebrew tap
+###### Step 3.2: Install the Weaveworks Homebrew tap
 ```
 brew tap weaveworks/tap
 ```
 
-Step 3.3: Install or upgrade eksctl
+###### Step 3.3: Install or upgrade eksctl
 ```
 brew install weaveworks/tap/eksctl
 ```
@@ -50,7 +50,7 @@ if eksctl is already installed, run the following command to upgrade:
 brew upgrade eksctl && brew link --overwrite eksctl
 ```
 
-Step 3.4: Check if eksctl is successfully installed
+###### Step 3.4: Check if eksctl is successfully installed
 ```
 eksctl version
 ```
@@ -82,7 +82,7 @@ to check available Kubernetes clusters.
 
 If you encounter error ```"aws-iam-authenticator": executable file not found in $PATH```, then your AWS account credentials were not configured correctly.
 
-Step 4: Specifying the alternative kubeconfig file for kubectl
+##### Step 4: Specifying the alternative kubeconfig file for kubectl
 ```
 export KUBECONFIG=~/.kube/eksctl/clusters/openfaas-eks
 ```
@@ -99,7 +99,7 @@ There is a [full tutorial](https://aws.amazon.com/blogs/opensource/deploy-openfa
 
 If you have followed the steps above, you already have AWS ClI, eksctl CLI and Kubernetes CLI installed. In the next steps, we'll just install 
 
-Step 1: Install Helm
+##### Step 1: Install Helm
 First, create a Kubernetes service account for the server component of Helm called Tiller:
 ```
 kubectl -n kube-system create sa tiller
@@ -117,7 +117,7 @@ helm init --upgrade --service-account tiller
 kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 ```
 
-Step 3: Create OpenFaaS Credentials
+##### Step 3: Create OpenFaaS Credentials
 Use [PASSWORD](https://docs.google.com/document/d/1YR27oAiMSkNcl4CCAiaQ6h-hg12sXD5WRzE_1wMKVVQ/edit?usp=sharing) as PASSWORD
 
 ```
@@ -126,14 +126,14 @@ kubectl -n openfaas create secret generic basic-auth \
 --from-literal=basic-auth-password=$PASSWORD
 ```
 
-Step 4: Install OpenFaaS with credentials enabled
+##### Step 4: Install OpenFaaS with credentials enabled
 
-Step 4.1: Add the OpenFaaS Helm chart repo 
+###### Step 4.1: Add the OpenFaaS Helm chart repo 
 ```
 helm repo add openfaas https://openfaas.github.io/faas-netes/
 ```
 
-Step 4.2: Install OpenFaaS with authentication enabled by default using Helm
+###### Step 4.2: Install OpenFaaS with authentication enabled by default using Helm
 ```
 helm upgrade openfaas --install openfaas/openfaas \
     --namespace openfaas  \
@@ -149,21 +149,21 @@ The settings above mean that functions will be installed into a separate namespa
 
 Run ```kubectl --namespace=openfaas get deployments -l "release=openfaas, app=openfaas"``` to verify your deployment, if you get at least ```1```, your deployment is correct.
 
-Step 4.3: After LoadBalancer is created, then you can display the public IP address
+###### Step 4.3: After LoadBalancer is created, then you can display the public IP address
 
 Use ```kubectl get svc -n openfaas -o wide``` to display the public IP address
 
-Step 4.4: Save the EXTERNAL-IP as an environment variable
+###### Step 4.4: Save the EXTERNAL-IP as an environment variable
 
 Type ```export OPENFAAS_URL=$(kubectl get svc -n openfaas gateway-external -o  jsonpath='{.status.loadBalancer.ingress[*].hostname}'):8080 \ && echo Your gateway URL is: $OPENFAAS_URL```
 
-Step 4.5: Save your login credentials to ``` ~/.openfaas/config.yaml```
+###### Step 4.5: Save your login credentials to ``` ~/.openfaas/config.yaml```
 
 Type ```echo $PASSWORD | faas-cli login --username admin --password-stdin```
 
 
 
-### Deploying functions on OpenFaas
+### Deploying functions on OpenFaaS
 
 
 ### Useful Links
