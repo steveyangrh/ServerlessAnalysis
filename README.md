@@ -112,7 +112,7 @@ Now deploy Tiller into the cluster:
 helm init --upgrade --service-account tiller
 ```
 
-Step 2: Creating Kubernetes Namespaces for OpenFaaS
+##### Step 2: Creating Kubernetes Namespaces for OpenFaaS
 ```
 kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 ```
