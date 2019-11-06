@@ -93,7 +93,7 @@ export KUBECONFIG=~/.kube/eksctl/clusters/openfaas-eks
 Looks like we cannot shut down a cluster, we have to delete it ..... kinda stupid, later on we just gotta keep it running, it may cost come money, don't worry about it
 
 
-### Deploying OpenFaas on AWS EKS 
+### Deploying OpenFaaS on AWS EKS (Only need to be done once)
 
 There is a [full tutorial](https://aws.amazon.com/blogs/opensource/deploy-openfaas-aws-eks/) on deploying OpenFaaS on AWS EKS, below shows the crutial steps.
 
@@ -126,7 +126,7 @@ kubectl -n openfaas create secret generic basic-auth \
 --from-literal=basic-auth-password=$PASSWORD
 ```
 
-Step 4: Install OpenFaas with credentials enabled
+Step 4: Install OpenFaaS with credentials enabled
 
 Step 4.1: Add the OpenFaaS Helm chart repo 
 ```
@@ -160,6 +160,8 @@ Type ```export OPENFAAS_URL=$(kubectl get svc -n openfaas gateway-external -o  j
 Step 4.5: Save your login credentials to ``` ~/.openfaas/config.yaml```
 
 Type ```echo $PASSWORD | faas-cli login --username admin --password-stdin```
+
+
 
 ### Deploying functions on OpenFaas
 
