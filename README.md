@@ -82,6 +82,11 @@ to check available Kubernetes clusters.
 
 If you encounter error ```"aws-iam-authenticator": executable file not found in $PATH```, then your AWS account credentials were not configured correctly.
 
+### Launch worker nodes that register with the Amazon EKS cluster (Only needed if we want to create new nodegroups)
+
+If you have followed the steps above, you have already created one nodegroup, if you want to attach new node groups to the cluster, you could follow this [tutorial](https://docs.aws.amazon.com/eks/latest/userguide/worker.html). Honestly, I don't fully understand the relationship between cluster and nodegroups. For now, it seems that we may not need to create extra nodegroups.
+
+
 ##### Step 4: Specifying the alternative kubeconfig file for kubectl
 ```
 export KUBECONFIG=~/.kube/eksctl/clusters/openfaas-eks
@@ -97,7 +102,7 @@ Looks like we cannot shut down a cluster, we have to delete it ..... kinda stupi
 
 There is a [full tutorial](https://aws.amazon.com/blogs/opensource/deploy-openfaas-aws-eks/) on deploying OpenFaaS on AWS EKS, below shows the crutial steps.
 
-If you have followed the steps above, you already have AWS ClI, eksctl CLI and Kubernetes CLI installed. In the next steps, we'll just install 
+If you have followed the steps above, you already have AWS ClI, eksctl CLI and Kubernetes CLI installed. In the next steps, we'll just install openfaas cli and helm on EKS
 
 ##### Step 1: Install Helm
 First, create a Kubernetes service account for the server component of Helm called Tiller:
@@ -170,6 +175,8 @@ Type ```echo $PASSWORD | faas-cli login --username admin --password-stdin```
 
 1. [Deploy the Kubernetes Web UI (Dashboard)](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html)
 2. [Understanding Kubernetes](https://www.digitalocean.com/community/tutorials/an-introduction-to-kubernetes)
+3. [Deploying Spark jobs on Amazon EKS](https://aws.amazon.com/blogs/opensource/deploying-spark-jobs-on-amazon-eks/)
+4. [Running Spark on Kubernetes](https://spark.apache.org/docs/latest/running-on-kubernetes.html)
 
 ### Report Documentation Link
 [Overleaf](https://www.overleaf.com/project/5dbb44b7d697d800012661ca)
